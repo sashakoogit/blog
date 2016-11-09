@@ -1,0 +1,37 @@
+<%= form_for @article, html: {class: "form-vertical"} do |f| %>
+
+<% if @article.errors.any? %>
+  <div id="error_explanation">
+      <div class="alert alert-danger">
+        <%= pluralize(@article.errors.count, "error") %> prohibited
+        this article from being saved:
+      </div>
+      <ul>
+        <% @particle.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+<div class="form-group">
+    <%= f.label :title, class: "label label-default" %>
+    <%= f.text_field :title, class: "form-control" %>
+<div>
+
+<div class="form-group">
+    <%= f.label :text, class: "label label-default" %>
+    <%= f.text_area :text, class: "form-control", rows: "5" %>
+<div>
+<div class="form-group">
+    <%= f.label :category, class: "label label-default" %>
+    <%= f.select :category_id, Category.all.collect { |c| [ c.name, c.id ] }, {include_blank: true}, {class: "form-control"} %>
+<div>
+<p>
+ <%= link_to 'Browse categories', controller: 'categories' %>
+</p>
+<% end %>
+
+
+
+
+
